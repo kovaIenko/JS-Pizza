@@ -1,3 +1,485 @@
-@mainColor: blue;
+@mainColor: rgb(237,133,48);
+@helpColor: #ffd8f4;
+
 
 @import "pizza/pizza-card";
+
+  #cart {
+
+    .title_column {
+      z-index: 1;
+      width: 75%;
+      position: fixed;
+      height: 60px;
+      background-color: rgba(0,0,0,0.6);
+
+
+      .in_up{
+        position: relative;
+        vertical-align:bottom;
+        text-align: center;
+        float: left;
+        width: 100px;
+        background-color: @mainColor;
+        height: 100%;
+        margin-left: 70px;
+        border: 1px solid @mainColor;
+        border-radius: 3px 3px 0px 0px;
+        color: snow;
+        font-family: Arial, Baskerville, monospace;
+      font-weight:bold;
+
+        .added{
+          position: absolute;
+          transform: rotate(180deg);
+          top: 59px;
+          left: -1px;
+        }
+
+      }
+
+      hr{
+        width: 60%;
+        margin: 0;
+        margin-left: 200px;
+      }
+      span{
+        vertical-align: middle;
+        font-family: Arial, Baskerville, monospace;
+        color: darkgray;
+        font-size: 12px;
+        margin-left: 1%;
+      }
+      button{
+
+        border: 1px solid @mainColor;
+        background-color: @mainColor;
+        border-radius: 3px 3px 3px 3px;
+        margin: 0.3%;
+        margin-left: 1%;
+
+      }
+       .in_up_down{
+        vertical-align: bottom;
+        font-family: Arial, Baskerville, monospace;
+        font-weight:bold;
+        color: darkgray;
+        font-size: 20px;
+
+      }
+    }
+
+    .container{
+      margin: 0;
+      padding: 0;
+
+      .under_row{
+
+        margin:0;
+        padding: 0;
+
+
+        .row {
+          margin-left: 5%;
+          width: 82%;
+
+          .gener{
+            height: 175px;
+            width: 175px;
+          }
+          .caption {
+            h3 {
+              margin: 1%;
+            }
+
+
+              .chose {
+                display: inline-block;
+                padding: 0.5%;
+                width: 47%;
+
+
+                span{
+                  text-align: center;
+                  display: block;
+                   img{
+                     margin-left: 2%;
+                   }
+                }
+                .price{
+                  margin-top: 20%;
+                  font-size: 20px;
+                  font-weight: bold;
+                  padding: 0;
+                }
+                .value{
+                  font-weight: bold;
+                  font-size:  14px;
+                }
+                a{
+                  color: white;
+                  background-color: @mainColor;
+                  margin-left: 12%;
+                }
+            }
+          }
+        }
+        .owns{
+          padding: 1.5%;
+          width: 100%;
+          background-color: @helpColor;
+
+          h5{
+            text-align: center;
+          }
+        }
+      }
+      .menu{
+        min-height: 180px;
+           padding: 1%;
+        h4{
+          top: 70px;
+          left: 43%;
+          position: absolute;
+
+          font-family: Arial, Baskerville, monospace;
+          font-weight:bold;
+          width: 90px;
+          font-size: 18px;
+
+          span{
+            margin-left: 3px;
+            background-color: @mainColor;
+            padding: 0.5%;
+            border-radius:  5px 5px 5px 5px ;
+          }
+
+        }
+        .butn {
+          margin-left: 15%;
+          position: absolute;
+          top: 90px;
+          width: 80%;
+          padding: 1%;
+
+          button {
+            font-size: 15px;
+            color: @mainColor;
+            margin-left: 0.1%;
+
+          }
+        }
+      }
+    }
+  }
+
+.orders {
+  position: fixed;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  z-index: 2;
+
+  .title_order{
+    border-bottom: 1px solid @mainColor;
+    margin: 0;
+    height: 60px;
+    background-color: white;
+    width: 100%;
+    padding: 1%;
+
+    h4{
+      width: 110px;
+      float: left;
+      font-weight:bold;
+      margin-left: 2%;
+
+      font-size: 18px;
+
+      span{
+        margin-left: 2px;
+        background-color: @mainColor;
+        padding: 0.5%;
+        border-radius:  5px 5px 5px 5px ;
+      }
+    }
+
+    button{
+      margin-top:4.5%;
+      display: block;
+      font-size: small;
+    }
+  }
+
+  .basket{
+    min-height: 320px;
+    background-color: @helpColor;
+
+
+    .ordered_pizza{
+      padding: 1%;
+      border-bottom: 1px solid @mainColor;
+      border-left:1px solid @mainColor;
+      height: 100px;
+      background-color: white;
+      position: relative;
+
+      .name_ordered{
+        color: @mainColor;
+        margin-left: 5%;
+        font-size: large;
+        margin-top: 1%;
+
+      }
+      .pi{
+        transform: rotate(-90deg);
+        right: 0;
+        bottom: 10px;
+        width: 80px;
+        height: 80px;
+        position: absolute;
+      }
+
+      .size{
+        margin-left:10%;
+      }
+      .down_ordered{
+        height: 100%;
+
+        span.price{
+          margin-top: 4%;
+          padding: 2%;
+         text-align: left;
+          vertical-align: bottom;
+          float:left;
+          display: block;
+          color: black;
+          font-size: medium;
+
+
+        }
+       .plus_minus {
+         margin-top: 3%;
+         margin-left: 3%;
+         padding: 3px;
+         width: 60%;
+         float: left;
+
+         .minus {
+           background-color: red;
+           height: 30px;
+           width: 30px;
+           color: white;
+           border: 2px solid white;
+           border-radius: 20px 20px 20px 20px;
+         }
+
+         .count_ordered{
+           padding: 2%;
+           background-color: @mainColor;
+           border-radius: 4px 4px 4px 4px;
+         }
+         .plus{
+              font-family: "Wide Latin";
+           color: white;
+            background-color: green;
+           width: 30px;
+           height: 30px;
+           border: 2px solid white;
+           border-radius: 20px 20px 20px 20px;
+
+         }
+
+         .delete{
+           margin-left: 5%;
+           position: absolute;
+           border-radius: 20px 20px 20px 20px;
+           background-color: #bdffb6;
+            color: white;
+           width: 30px;
+           height: 30px;
+           border: 2px solid white;
+
+
+         }
+       }
+      }
+    }
+  }
+  .result{
+    width: 100%;
+    height: 40px;
+    background-color: white;
+
+    h4{
+      margin-left: 2%;
+      position: relative;
+      font-weight:bold;
+
+      span{
+        right: 2%;
+        position: absolute;
+      }
+    }
+
+    button{
+      margin-left: 15%;
+      border: 1px solid @mainColor;
+      border-radius: 4px 4px 4px 4px;
+      background-color: @mainColor;
+      width: 200px;
+      color: white;
+      font-size: 22px;
+
+    }
+  }
+}
+
+.sale{
+  position: fixed;
+  vertical-align:bottom;
+  text-align: center;
+  width: 100px;
+  background-color: @mainColor;
+  margin-left: 70px;
+  border: 1px solid @mainColor;
+  color: white;
+  font-family: Arial, Baskerville, monospace;
+  font-weight:bold;
+  margin-top: 551px;
+
+  img{
+    margin-top: -35px;
+    margin-left: -1px;
+
+  }
+}
+
+@media (max-width: 996px) {
+  .one_delete{
+    display: none;
+  }
+
+.orders{
+  margin-left: 75%;
+
+}
+  
+}
+@media (max-width: 900px) {
+  .in_up_down, hr{
+    display: none;
+  }
+  .gener{
+    padding: 3%;
+  }
+
+}
+@media (max-width: 820px) {
+
+  .menu{
+    height: 190px;
+  }
+  .two_delete{
+    display: none;
+  }
+  .gener{
+    padding: 4%;
+  }
+
+}
+
+@media (max-width: 710px) {
+
+  .gener{
+    padding: 5%;
+  }
+
+  .menu{
+    height: 230px;
+  }
+   .title_order{
+     h4{
+       margin-bottom: 0;
+     }
+   }
+  .clean_list{
+    margin:0;
+    display: inline-block;
+  }
+  .ordered_pizza{
+    .name_ordered{
+      margin-left: 2%;
+      font-size: medium;
+      margin-top: 0.5%;
+
+    }
+    .pi{
+
+    }
+
+    .size{
+      margin-left:7%;
+    }
+    .down_ordered{
+      height: 100%;
+
+      span.price{
+        margin-top: 3%;
+        padding: 1%;
+        font-size: smaller;
+
+
+      }
+      .plus_minus {
+        width: 50%;
+        position: relative;
+        margin-top: 3%;
+        margin-left: 3%;
+        padding: 3px;
+
+        .minus {
+
+          height: 25px;
+          width: 25px;
+
+        }
+
+        .count_ordered{
+          padding: 3%;
+        }
+        .plus{
+          width: 25px;
+          height: 25px;
+
+
+        }
+
+        .delete{
+          margin-left: 1.5%;
+          width: 25px;
+          height: 25px;
+
+
+        }
+      }
+    }
+
+  }
+
+}
+@media (max-width: 640px) {
+  .menu{
+    height: 260px;
+  }
+  .phone{
+    display: none;
+  }
+  .chose{
+    a{
+      margin-left: -2%;
+    }
+  }
+
+
+}
