@@ -6,8 +6,6 @@
 
   #cart {
 
-
-
     .title_column {
       z-index: 1;
       width: 75%;
@@ -76,15 +74,17 @@
       padding: 0;
 
       .under_row{
+
         margin:0;
         padding: 0;
+
 
         .row {
           margin-left: 5%;
           width: 82%;
 
           .thumbnail{
-            height: 550px;
+            height: 570px;
           }
           .label{
             margin: 0;
@@ -95,8 +95,6 @@
 
           }
           .caption {
-            position: relative;
-            margin: 0;
             .title{
               margin: 0.5%;
               font-weight: bolder;
@@ -108,48 +106,40 @@
               font-weight: bold;
 
             }
-            .all_pizzes{
-              width: 96%;
-              margin: 0 auto;
-              margin-top: 5%;
-               padding: 2%;
-              position: absolute;
-              display: flex;
-              justify-content: center;
+
 
               .chose {
-              padding: 0.5%;
+                display: inline-block;
+                padding: 0.5%;
+                width: 47%;
 
-              span {
-                text-align: center;
-                display: block;
-                img {
-                  margin-left: 2%;
+
+                span{
+                  text-align: center;
+                  display: block;
+                   img{
+                     margin-left: 2%;
+                   }
                 }
-              }
-              .price {
-                margin-top: 20%;
-                font-size: 20px;
-                font-weight: bold;
-                padding: 0;
-              }
-              .value {
-                margin: 0;
-                font-weight: bold;
-                font-size: 14px;
-              }
-              button {
-                color: white;
-                //background-color: @mainColor;
-                margin: 0 auto;
-                margin-top: 2%;
-                margin-left: 15%;
-              }
-              .small_buy {
-                color: @mainColor;
-                border: 1px solid @mainColor;
-              }
-            }
+                .price{
+                  margin-top: 20%;
+                  font-size: 20px;
+                  font-weight: bold;
+                  padding: 0;
+                }
+                .value{
+                  font-weight: bold;
+                  font-size:  14px;
+                }
+                button{
+                  color: white;
+                  //background-color: @mainColor;
+                  margin-left: 16%;
+                }
+                .small_buy{
+                  color: @mainColor;
+                  border: 1px solid @mainColor;
+                }
             }
           }
         }
@@ -179,7 +169,7 @@
           span{
             margin-left: 3px;
             background-color: @mainColor;
-            padding: 3%;
+            padding: 0.5%;
             border-radius:  5px 5px 5px 5px ;
           }
 
@@ -212,7 +202,7 @@
   .title_order{
     border-bottom: 1px solid @mainColor;
     margin: 0;
-    min-height: 60px;
+    height: 60px;
     background-color: white;
     width: 100%;
     padding: 1%;
@@ -223,54 +213,42 @@
       font-weight:bold;
       margin-left: 2%;
 
-      font-size: 17px;
+      font-size: 18px;
 
       span{
         margin-left: 2px;
         background-color: @mainColor;
-        padding: 3%;
+        padding: 0.5%;
         border-radius:  5px 5px 5px 5px ;
       }
     }
 
     button{
-      margin-top:2%;
-      margin-left: 10%;
+      margin-top:4.5%;
+      display: block;
       font-size: small;
     }
   }
 
   .basket {
-    overflow: scroll;
-    min-height: 490px;
-    max-height: 490px;
+    min-height: 320px;
     background-color: @helpColor;
     .booked{
-      border-bottom: 1px solid @mainColor;
       height: 100px;
       overflow: hidden;
       position: relative;
+      border: 1px solid black;
       background-color: aliceblue;
     }
     .name_name{
-      margin-left: 3%;
-      font-weight: bold;
-      font-size: large;
     }
     .ph {
       position: absolute;
-      right: -40px;
+      right: 0;
       height: 80px;
-      bottom: 10px;
-
     }
-    .size{
-      margin-top: 2%;
-      display: block;
-      margin-left: 2%;
-    }
-        .price_ {
-          margin-top: 3%;
+        span.price {
+          margin-top: 4%;
           padding: 2%;
           text-align: left;
           vertical-align: bottom;
@@ -278,12 +256,14 @@
           display: block;
           color: black;
           font-size: medium;
-         margin-left: 1%;
+
         }
         .plus_minus {
-          margin-top: 2%;
-          margin-left: 0.1%;
-          width: 55%;
+          border: 1px solid black;
+          margin-top: 3%;
+          margin-left: 3%;
+          padding: 3px;
+          width: 60%;
           float: left;
 
           .minus {
@@ -296,10 +276,14 @@
           }
           .plus {
             border-radius: 20px 20px 20px 20px;
+
           }
+
           .delete {
             margin-left: 5%;
             border-radius: 20px 20px 20px 20px;
+
+
         }
       }
 
@@ -315,10 +299,11 @@
       font-weight:bold;
 
       span{
-        margin-left:20%;
-
+        right: 2%;
+        position: absolute;
       }
     }
+
     button{
       margin-left: 15%;
       border: 1px solid @mainColor;
@@ -351,26 +336,8 @@
 
   }
 }
-@media (max-width: 1125px){
-  .title_order {
-    h4 {
-      margin: 0%;
-      font-size: 14px;
-    }
-    button{
-      margin: 0;
-      margin-top: 0.1%;
-    }
-  }
-}
 
 @media (max-width: 996px) {
-  .title_order {
-    h4 {
-      margin: 0%;
-      font-size: 14px;
-    }
-  }
   .one_delete{
     display: none;
   }
@@ -382,18 +349,6 @@
   
 }
 @media (max-width: 900px) {
-
-  .small_buy{
-    margin: 0;
-    margin-left: 5%;
-    font-size: 13px;
-  }
-  .big_buy{
-    margin: 0;
-    margin-left: 5%;
-    font-size: 15px;
-  }
-
   .in_up_down, hr{
     display: none;
   }
@@ -418,30 +373,22 @@
 
 @media (max-width: 710px) {
 
-
-  .small_buy{
-    margin: 0;
-    font-size: 10px;
+  .gener{
+    padding: 5%;
   }
-  .big_buy{
-    margin: 0;
 
-    font-size: 10px;
-  }
   .menu{
     height: 230px;
   }
-   .title_order {
-     h4 {
-       margin: 0.3%;
-       font-size: 12px;
+   .title_order{
+     h4{
+       margin-bottom: 0;
      }
-     .clean_list{
-       margin: 0;
-
-     }
-
-    }
+   }
+  .clean_list{
+    margin:0;
+    display: inline-block;
+  }
   .ordered_pizza{
     .name_ordered{
       margin-left: 2%;
@@ -449,11 +396,16 @@
       margin-top: 0.5%;
 
     }
+    .pi{
+
+    }
 
     .size{
-      border: 1px solid black;
       margin-left:7%;
     }
+    .down_ordered{
+      height: 100%;
+
       span.price{
         margin-top: 3%;
         padding: 1%;
@@ -492,29 +444,23 @@
 
 
         }
+      }
     }
 
   }
 
 }
 @media (max-width: 640px) {
-
-  .small_buy{
-    margin: 0;
-    font-size: 5px;
-  }
-  .big_buy{
-    margin: 0;
-    font-size: 5px;
-  }
-  .title_order{
-    max-height: 70px;
-  }
   .menu{
     height: 260px;
   }
   .phone{
     display: none;
+  }
+  .chose{
+    a{
+      margin-left: -2%;
+    }
   }
 
 

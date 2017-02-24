@@ -1,9 +1,24 @@
 <div>
-    <%= pizza.title %> (<%= size %>)
-    <div>Ціна: <%= pizza[size].price %> грн.</div>
-    <div>
-        <button class="btn btn-danger minus">-</button>
+    <div class="booked">
+        <% if(size=="small_size"){%>
+    <span class="name_name"><%= pizza.title %> (Мала)</span>
+        <% }else if(size=="big_size") {%>
+        <span class="name_name"><%= pizza.title %> (Велика)</span>
+        <%}%>
+ <div class="size">
+        <img src="assets/images/size-icon.svg" class="on">
+        <span><%= pizza[size].size %></span>
+        <img src="assets/images/weight.svg" class="tw">
+        <span><%=pizza[size].weight%> </span>
+    </div>
+    <img class="ph" src="<%= pizza.icon %>" alt="Pizza" >
+    <div class="price_">Ціна: <span><%= pizza[size].price*quantity %></span> грн.</div>
+    <div class="plus_minus">
+        <button class="btn btn-warning minus">-</button>
         <span class="label label-default"><%= quantity %></span>
         <button class="btn btn-success plus">+</button>
+        <button class="btn btn-danger delete"> X </button>
+        </div>
     </div>
 </div>
+

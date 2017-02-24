@@ -15,12 +15,11 @@ function getIngredientsArray(pizza) {
 
     return result;
 }
-
    %>
-<div class="col-md-6 col-lg-4 pizza-card">
+<div class="col-xs-12 col-sm-6 col-md-4 pizza-card">
     <div class="thumbnail">
-        <img class="pizza-icon" src="<%= pizza.icon %>" alt="Pizza">
 
+        <img class="pizza-icon" src="<%= pizza.icon %>" alt="Pizza">
         <% if(pizza.is_new) { %>
         <span class="label label-danger">Нова</span>
         <% } else if(pizza.is_popular) {%>
@@ -33,9 +32,30 @@ function getIngredientsArray(pizza) {
             <div class="description">
                 <%= getIngredientsArray(pizza).join(", ") %>
             </div>
-        </div>
+
 
         <!-- Перед тим щоб показати кнопку необхідно переконатися, що піца має великий розмір -->
-        <button class="btn btn-primary buy-big">Купити велику</button>
+            <div class="all_pizzes">
+        <% if(pizza.small_size) { %>
+        <div  class="buy-small  chose col-sm-6">
+        <span> <img src="assets/images/size-icon.svg" class="" ><%=pizza.small_size.size %></span>
+        <span> <img src="assets/images/weight.svg" class="" ><%=pizza.small_size.weight %></span>
+        <span class="price"><%=pizza.small_size.price %></span>
+        <span class="value">грн</span>
+        <button  class="btn btn-default  small_buy">Купити</button>
+            </div>
+        <% } %>
+        <% if(pizza.big_size) { %>
+        <div class="buy-big chose col-sm-6">
+        <span> <img src="assets/images/size-icon.svg" class="" ><%=pizza.big_size.size %></span>
+        <span > <img src="assets/images/weight.svg" class="" ><%=pizza.big_size.weight %></span>
+        <span class="price"><%=pizza.big_size.price %></span>
+        <span class="value">грн</span>
+        <button class="btn btn-primary big_buy">Купити </button>
+            </div>
+        <% } %>
+        </div>
+            </div>
     </div>
 </div>
+
