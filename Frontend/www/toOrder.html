@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>order</title>
+
+    <!-- Bootsrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- LESS основний файл -->
+    <link rel="stylesheet/less" type="text/css" href="assets/less/main.less" />
+    <!-- LESS JavaScript компілятор -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script>
+</head>
+<body>
+
+<div  id="cart">
+    <div class="title_column">
+        <div class="in_up">
+            <h6>PIZZA</h6>
+            <h4> KMA</h4>
+            <img  class="added"  src="assets/images/discount.svg">
+        </div>
+        <div class="sale">
+            <img  class="added"  src="assets/images/discount.svg">
+            <h5>Цього тижня знижка на все -20%
+            </h5>
+        </div>
+
+        <div >
+            <span class="phone">(068) 102 8489</span>
+            <span class="two_delete">24 години/7 днів на тиждень</span>
+            <span class="one_delete">Безкоштовна доставка піци</span>
+            <button>Ввійти</button>
+        </div>
+        <hr/>
+        <span class="in_up_down">Піца</span>
+
+    </div>
+
+
+
+
+    <div   class="container  col-xs-6 col-sm-8 col-md-9 ">
+    <div class="container_header col-xs-12 col-sm-12 col-md-12 " >
+        <div   class="form_left  col-xs-6 col-sm-6 col-md-6">
+            <h3>1. Контактні дані</h3>
+            <form role="form" data-toggle="validator">
+            <div  class=" form-group" id="on">
+                <label   for="inputName" class="control-label">Ім'я</label>
+                <input type="text" class="form-control has-warning" id="inputName" placeholder="Ім'я " required>
+                <span class="glyphicon name_" ></span>
+            </div>
+            <div   class="form-group" id="tw">
+                <label  for="inputPhone" class="control-label">Телефон</label>
+                <input maxlength="13" type="text" class="data-fv-phone-message form-control" id="inputPhone" placeholder="+380681028489" required>
+                <span class="glyphicon  phoneNumber_" ></span>
+            </div>
+            <div class=" form-group" id="th">
+                <label  for="inputAdress" class="control-label">Адреса</label>
+                <input type="" class="form-control" id="inputAdress" placeholder="Контрактовая площадь, Київ, Украина, 02000" required>
+                <span class="glyphicon adress_" ></span>
+            </div>
+
+        </form>
+        </div>
+        <div   class="info_right  col-xs-6 col-sm-6 col-md-6">
+           <div  class="info">
+               <h4>Інформація про замовлення</h4>
+               <p>Приблизний час доставки: <span class="timeDeliver">невідомий</span></p>
+               <p>Адреса доставки: <span class="adressDeliver">невідома</span></p>
+           </div>
+            <button class="next">
+                Далі<span>></span>
+            </button>
+
+        </div>
+
+    </div>
+            <div class="owns">
+                <h5>Pizza22-практичний проект в межах курсу JavaScript в Києво-Могилянкській академії</h5>
+                <h5>Доставка піци не здіснюється</h5>
+            </div>
+
+    </div>
+
+
+<div  class="orders  col-xs-6  col-sm-4 col-md-3">
+    <div class="title_order">
+        <h4>Замовлення<span class="quent">0</span></h4>
+    </div>
+    <div class="basket">
+
+    </div>
+    <div class="result">
+        <h4>Сума замовлення<span class="cost">0</span>грн</h4>
+        <button class="kn">Редагувати замовлення</button>
+    </div>
+</div>
+</div>
+<!-- jQuery JavaScript -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"> </script>
+
+<!--Bootsrap JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script type="text/javascript"  src="assets/js/main.js"> </script>
+
+</body>
+</html>

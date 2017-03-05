@@ -1,0 +1,35 @@
+<div  id="cart">
+    <div   class="container col-xs-6 col-sm-8 col-md-9 ">
+<% include common/header.ejs %>
+
+        <div class="menu">
+            <h4>Усі піци<span class="pizza_count">8</span></h4>
+            <div class="butn">
+                <button	type="button"	class="all btn btn-link">Усі</button>
+                <button	type="button"	class="meat btn btn-link">М'ясні</button>
+                <button	type="button"	class="pineapple btn btn-link">З ананасами</button>
+                <button	type="button"	class="mushroom btn btn-link">З грибами</button>
+                <button	type="button"	class="sea btn btn-link">З морепродуктами</button>
+                <button	type="button"	class="vega btn btn-link">Вега</button>
+            </div>
+        </div>
+        <div   class="under_row">
+            <div  class="row" id="pizza_list">
+            </div>
+<% include common/footer.ejs %>
+        </div>
+    </div>
+    <div  class="orders  col-xs-6  col-sm-4 col-md-3">
+        <div class="title_order">
+            <h4>Замовлення<span class="quent">0</span></h4>
+            <button class="btn btn-link clean_list">Очистити список</button>
+        </div>
+        <div class="basket">
+
+        </div>
+        <div class="result">
+            <h4>Сума замовлення<span class="cost">0</span>грн</h4>
+            <button class="kg"> Замовити </button>
+        </div>
+    </div>
+</div>

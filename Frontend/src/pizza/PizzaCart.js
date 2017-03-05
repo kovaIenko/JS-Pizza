@@ -11,9 +11,20 @@ var PizzaSize = {
 
 var Storage	=	require('../storage');
 var orders	=	{};
+var API_=require("./../API");
 
 //Змінна в якій зберігаються перелік піц в кошику
 var Cart = [];
+
+
+$(".next").click(function () {
+    API_.createOrder(Cart,function (err,temp,data) {
+        if(err)
+            console.log("Error");
+        console.log("Success")
+    })
+
+});
 
 //HTML едемент куди будуть додаватися піци
 var $cart = $(".basket");
@@ -56,6 +67,7 @@ function addToCart(pizza, size) {
     updateCart();
 }
 
+
 function removeFromCart(cart_item) {
     var booked_name=cart_item.pizza.title;
     var booked_size=cart_item.size;
@@ -80,6 +92,130 @@ function removeFromCart(cart_item) {
     updateCart();
 }
 
+/**
+ * Created by Ruslan on 02.03.2017.
+ */
+
+
+
+var nextConfirm=false;
+var nextConfirm1=false;
+var nextConfirm2=false;
+var name_feedback=$(".name_");
+var name_input=$("#inputName");
+var phone_feedback=$(".phoneNumber_");
+var phone_input=$("#inputPhone");
+var adress_feedback=$(".adress_");
+var adress_input=$("#inputAdress");
+
+
+$("#inputName").keyup(function () {
+    var nameArr = $("#inputName").val();
+    //  alert(nameArr.charAt(0));
+    //  alert(nameArr);
+    //alert(nameArr.length);
+
+    if(nameArr==""){
+        nextConfirm=false;
+        name_feedback.css("display","block");
+        name_feedback.text("The name field cannot be empty");
+    }
+    for(var i=0;i<nameArr.length;i++)
+    {
+
+        if((nameArr.charAt(i)<'Є'||nameArr.charAt(i)>'ї')&&nameArr.charAt(i)!='')
+        {
+            name_feedback.css("display","block");
+            name_feedback.text("The field cannot have a number or  symbol");
+            break;
+        }
+        else
+        {
+            nextConfirm=true;
+            name_feedback.css("display","none");
+            //  break;
+        }
+    }
+});
+
+$(".next").click(function () {
+    var name = name_input.val();
+    var phone = phone_input.val();
+    var address = adress_input.val();
+    alert(name);
+    var data = {
+        Cart: Cart,
+        name: name,
+        phone: phone,
+        address: address
+    };
+
+    if (nextConfirm&&nextConfirm1&&nextConfirm2) {
+        API_.createOrder(data, function (err, data) {
+            if (err)
+                console.log("Error")
+            else
+                console.log("Success");
+        });
+    }
+});
+
+$("#inputPhone").keyup(function () {
+    var phoneArr = $("#inputPhone").val();
+    // alert(phoneArr);
+    if(phoneArr==""){
+        nextConfirm1=false;
+        phone_feedback.css("display","block");
+        phone_feedback.text("The phone field cannot be empty");
+    }
+
+    for(var i=0;i<phoneArr.length;i++)
+    {
+
+        if((phoneArr.charAt(i)<'0'||phoneArr.charAt(i)>'9')&&phoneArr.charAt(i)!='+')
+        {
+            phone_feedback.css("display","block");
+            phone_feedback.text("The phone field should be only a number");
+            break;
+        }
+        else
+        {
+            nextConfirm1=true;
+            phone_feedback.css("display","none");
+            //  break;
+        }
+    }
+});
+
+$("#inputAdress").keyup(function () {
+    var adressArr = $("#inputAdress").val();
+    if(adressArr==""){
+        nextConfirm2=false;
+        adress_feedback.css("display","block");
+        adress_feedback.text("The adress field cannot be empty");
+    }
+    for(var i=0;i<adressArr.length;i++)
+    {
+
+        if((adressArr.charAt(i)!='.'&&adressArr.charAt(i)!=','&&adressArr.charAt(i)!=' ')&&
+            (adressArr.charAt(i)<'Є'||adressArr.charAt(i)>'ї')&&(adressArr.charAt(i)<'0'||adressArr.charAt(i)>'9'))
+        {
+            adress_feedback.css("display","block");
+            adress_feedback.text("The adress field cannot have a symbols");
+
+            break;
+        }
+        else
+        {
+            nextConfirm2=true;
+            adress_feedback.css("display","none");
+            //  break;
+        }
+    }
+});
+
+
+
 
 
 function initialiseCart() {
@@ -87,6 +223,7 @@ function initialiseCart() {
     //Тут можна наприклад, зчитати вміст корзини який збережено в Local Storage то показати його
     //TODO: ...
     var saved_orders =Storage.get('cart');
+
     if(saved_orders){
         Cart=saved_orders;
     }
@@ -100,7 +237,6 @@ function initialiseCart() {
         genQuent = save_genQuant;
         quent.text(genQuent);
     }
-
     updateCart();
 }
 
@@ -203,6 +339,12 @@ $(".clean_list").click(function () {
     updateCart();
 
 });
+
+
+
+
+
+
 
 exports.removeFromCart = removeFromCart;
 exports.addToCart = addToCart;

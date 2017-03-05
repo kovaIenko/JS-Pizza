@@ -1,0 +1,54 @@
+
+    <div  id="cart">
+    <div    class="container  col-xs-6 col-sm-8 col-md-9 ">
+        <% include common/header.ejs %>
+        <div  class="container_header col-xs-12 col-sm-12 col-md-12 " >
+            <div   class="form_left  col-xs-6 col-sm-6 col-md-6">
+                <h3>1. Контактні дані</h3>
+                <form role="form" data-toggle="validator">
+                    <div  class=" form-group" id="on">
+                        <label   for="inputName" class="control-label">Ім'я</label>
+                        <input type="text" class="form-control has-warning" id="inputName" placeholder="Ім'я та Прізвище" required>
+                        <span class="glyphicon name_" ></span>
+                    </div>
+                    <div   class="form-group" id="tw">
+                        <label  for="inputPhone" class="control-label">Телефон</label>
+                        <input maxlength="13" type="text" class="data-fv-phone-message form-control" id="inputPhone" placeholder="+380681028489" required>
+                        <span class="glyphicon  phoneNumber_" ></span>
+                    </div>
+                    <div class=" form-group" id="th">
+                        <label  for="inputAdress" class="control-label">Адреса</label>
+                        <input type="" class="form-control" id="inputAdress" placeholder="Контрактовая площадь, Київ, Украина, 02000" required>
+                        <span class="glyphicon adress_" ></span>
+                    </div>
+
+                </form>
+            </div>
+            <div  class="info_right  col-xs-6 col-sm-6 col-md-6">
+                <div  class="info">
+                    <h4>Інформація про замовлення</h4>
+                    <p>Приблизний час доставки: <span class="timeDeliver">невідомий</span></p>
+                    <p>Адреса доставки: <span class="adressDeliver">невідома</span></p>
+                </div>
+                <button class="next">
+                    Далі<span>></span>
+                </button>
+            </div>
+            <div style="margin-top: 300px"><%  include common/footer.ejs %></div>
+
+    </div>
+        </div>
+</div>
+<div  class="orders  col-xs-6  col-sm-4 col-md-3">
+    <div class="title_order">
+        <h4>Замовлення<span class="quent">0</span></h4>
+    </div>
+    <div class="basket">
+
+    </div>
+    <div class="result">
+        <h4>Сума замовлення<span class="cost">0</span>грн</h4>
+        <button class="kn">Редагувати замовлення</button>
+    </div>
+</div>
+
