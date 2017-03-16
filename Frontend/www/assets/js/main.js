@@ -259,20 +259,10 @@ var PizzaSize = {
 
 var Storage	=	require('../storage');
 var orders	=	{};
-var API_=require("./../API");
+var API = require('../API.js');
 
 //Змінна в якій зберігаються перелік піц в кошику
 var Cart = [];
-
-
-$(".next").click(function () {
-    API_.createOrder(Cart,function (err,temp,data) {
-        if(err)
-            console.log("Error");
-        console.log("Success")
-    })
-
-});
 
 //HTML едемент куди будуть додаватися піци
 var $cart = $(".basket");
@@ -353,8 +343,8 @@ var name_feedback=$(".name_");
 var name_input=$("#inputName");
 var phone_feedback=$(".phoneNumber_");
 var phone_input=$("#inputPhone");
-var adress_feedback=$(".adress_");
 var adress_input=$("#inputAdress");
+var adress_feedback=$(".adress_");
 
 
 $("#inputName").keyup(function () {
@@ -386,27 +376,60 @@ $("#inputName").keyup(function () {
     }
 });
 
-$(".next").click(function () {
+
+$(".next").click(function(){
+
     var name = name_input.val();
     var phone = phone_input.val();
     var address = adress_input.val();
-    alert(name);
-    var data = {
+
+    var order	=	{
         Cart: Cart,
         name: name,
-        phone: phone,
+        phone:phone,
         address: address
     };
+    var access=false;
+if(nextConfirm&&nextConfirm2&&nextConfirm1) {
+    API.createOrder(order, function (err, data) {
+        if (err) {
+            console.log("err")
+        } else {
+            LiqPayCheckout.init({
+                data: data.data,
+                signature: data.signature,
+                embedTo: "#liqpay",
+                mode: "popup"	//	embed	||	popup
+            }).on("liqpay.callback", function (data) {
+                  if(data.status=="sandbox"||data.status=="success")
+                    alert("Операція успішна");
+                 else  alert("Операція не була виконана");
 
-    if (nextConfirm&&nextConfirm1&&nextConfirm2) {
-        API_.createOrder(data, function (err, data) {
-            if (err)
-                console.log("Error")
-            else
-                console.log("Success");
-        });
+
+            }).on("liqpay.ready", function (data) {
+
+            }).on("liqpay.close", function (data) {
+            });
+            alert(signature);
+        }
+    });
+}
+else {
+    if(!nextConfirm){
+        name_feedback.css("display","block");
+        name_feedback.text("The name field cannot be empty");
     }
+     if(!nextConfirm1){
+        phone_feedback.css("display","block");
+        phone_feedback.text("The phone field cannot be empty");
+    }
+     if(!nextConfirm2){
+        adress_feedback.css("display","block");
+        adress_feedback.text("The phone field cannot be empty");
+    }
+}
 });
+
 
 $("#inputPhone").keyup(function () {
     var phoneArr = $("#inputPhone").val();
@@ -435,32 +458,6 @@ $("#inputPhone").keyup(function () {
     }
 });
 
-$("#inputAdress").keyup(function () {
-    var adressArr = $("#inputAdress").val();
-    if(adressArr==""){
-        nextConfirm2=false;
-        adress_feedback.css("display","block");
-        adress_feedback.text("The adress field cannot be empty");
-    }
-    for(var i=0;i<adressArr.length;i++)
-    {
-
-        if((adressArr.charAt(i)!='.'&&adressArr.charAt(i)!=','&&adressArr.charAt(i)!=' ')&&
-            (adressArr.charAt(i)<'Є'||adressArr.charAt(i)>'ї')&&(adressArr.charAt(i)<'0'||adressArr.charAt(i)>'9'))
-        {
-            adress_feedback.css("display","block");
-            adress_feedback.text("The adress field cannot have a symbols");
-
-            break;
-        }
-        else
-        {
-            nextConfirm2=true;
-            adress_feedback.css("display","none");
-            //  break;
-        }
-    }
-});
 
 
 
@@ -587,13 +584,161 @@ $(".clean_list").click(function () {
     updateCart();
 
 });
+//лінія між двома пунктами
+var directions;
+
+function	initialize() {
+    var point;
+    var markerHome;
+    var latitude = 50.41752522393159;
+    var longitude = 30.53748012520373;
+    //Тут починаємо працювати з картою
+    var mapProp = {
+        center: new google.maps.LatLng(latitude, longitude),
+        zoom: 13
+    };
+    var html_element = document.getElementById("googleMap");
+    map = new google.maps.Map(html_element, mapProp);
+
+    point = new google.maps.LatLng(latitude, longitude);
+    var marker = new google.maps.Marker({
+        position: point,
+        animation: google.maps.Animation.DROP,
+        map: map,
+        icon: "assets/images/map-icon.png"
+    });
+
+    google.maps.event.addListener(map,
+        'click', function (me) {
+            if (markerHome) {
+                markerHome.setMap(null);
+                markerHome = null;
+            }
+            var coordinates = me.latLng;
+
+            markerHome = new google.maps.Marker({
+                position: coordinates,
+                animation: google.maps.Animation.DROP,
+                map: map,
+                icon: "assets/images/home-icon.png"
+            });
+            nextConfirm2=true;
+            adress_feedback.css("display","none");
+            geocodeLatLng(coordinates, function (err, adress) {
+                if (!err) {
+                    $("#inputAdress").val(adress);
+                    $(".adressDeliver").text(adress);
+
+                }
+            });
+            calculateRoute(point, me.latLng, function (err, time) {
+                if (!err) {
+                    $(".timeDeliver").text(time.duration.text);
+
+                }
+            });
+        });
+
+    $("#inputAdress").keypress(function(){
+        if( $("#inputAdress").val().length>4){
+            var coordinates;
+
+            if(markerHome){
+                markerHome.setMap(null);
+                markerHome = null;
+            }
+            var adressArr = $("#inputAdress").val();
+            geocodeAddress(adressArr, function(err, inputCoordinates){
+                if(!err){
+                    coordinates	=	inputCoordinates;
+                    console.log(coordinates);
+                    markerHome	=	new	google.maps.Marker({
+                        position:	coordinates,
+                        animation: google.maps.Animation.DROP,
+                        map:	map,
+                        icon:	"assets/images/home-icon.png"
+                    });
+                    geocodeLatLng(coordinates,	function(err,	adress){
+                        if(!err)	{
+                            console.log(adressArr);
+                            $(".adressDeliver").text(adress);
+                        }
+                    });
+                    calculateRoute(point,	 coordinates,	function(err, time){
+                        if(!err){
+                            $(".timeDeliver").text(time.duration.text);
+
+                        }
+                    });
+                }
+            });
+        }
+    });
+}
 
 
 
 
 
 
+function	geocodeLatLng(latlng,	 callback){
+//Модуль за роботу з адресою
+    var geocoder	=	new	google.maps.Geocoder();
+    geocoder.geocode({'location':	latlng},	function(results,	status)	{
+        if	(status	===	google.maps.GeocoderStatus.OK&&	results[1])	{
+            var adress =	results[1].formatted_address;
+            callback(null,	adress);
+        }	else	{
+            callback(new	Error("Can't	find	adress"));
+        }
+    });
+}
 
+function	geocodeAddress(address,	 callback)	{
+    var geocoder	=	new	google.maps.Geocoder();
+    geocoder.geocode({'address':	address},	function(results,	status)	{
+        if	(status	===	google.maps.GeocoderStatus.OK&&	results[0])	{
+            var coordinates	=	results[0].geometry.location;
+            callback(null,	coordinates);
+        }	else	{
+            callback(new	Error("Can	not	find	the	adress"));
+        }
+    });
+}
+
+function	calculateRoute(A_latlng,	 B_latlng,	callback)	{
+    nextConfirm2=true;
+    adress_feedback.css("display","none");
+    if(directions){
+        directions.setMap(null);
+        directions=null;
+    }
+    directions = new google.maps.DirectionsRenderer();
+    var directionService =	new	google.maps.DirectionsService();
+    directionService.route({
+        origin:	A_latlng,
+        destination:	B_latlng,
+        travelMode:	google.maps.TravelMode["DRIVING"]
+    },
+        function(response,	status)	{
+        if	(status	==	google.maps.DirectionsStatus.OK )	{
+            directions.setDirections(response);
+            var leg	=	response.routes[0].legs[0];
+            callback(null,	{
+                duration:	leg.duration
+            });
+        }	else	{
+            callback(new	Error("Can'	not	find	direction"));
+        }
+    });
+    directions.setMap(map);
+    directions.setOptions( { suppressMarkers: true } );
+}
+
+
+
+
+google.maps.event.addDomListener(window,	 'load',	initialize);
 exports.removeFromCart = removeFromCart;
 exports.addToCart = addToCart;
 
@@ -601,7 +746,7 @@ exports.getPizzaInCart = getPizzaInCart;
 exports.initialiseCart = initialiseCart;
 
 exports.PizzaSize = PizzaSize;
-},{"../Templates":3,"../storage":7,"./../API":1}],6:[function(require,module,exports){
+},{"../API.js":1,"../Templates":3,"../storage":7}],6:[function(require,module,exports){
 /**
  * Created by chaika on 02.02.16.
  */
@@ -696,6 +841,8 @@ function initialiseMenu() {
 $(".kg").click(function () {  //кнопка замовити
     window.location.href="/toOrder.html";
 });
+
+
 
 exports.filterPizza = filterPizza;
 exports.initialiseMenu = initialiseMenu;

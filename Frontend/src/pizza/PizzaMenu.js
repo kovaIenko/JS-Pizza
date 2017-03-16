@@ -93,5 +93,7 @@ $(".kg").click(function () {  //кнопка замовити
     window.location.href="/toOrder.html";
 });
 
+
+
 exports.filterPizza = filterPizza;
 exports.initialiseMenu = initialiseMenu;
